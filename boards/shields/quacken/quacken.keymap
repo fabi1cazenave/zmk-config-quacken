@@ -2,6 +2,16 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <225>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -9,7 +19,7 @@
             display-name = "Base";
             bindings = <
    &none     &kp Q &kp W      &kp E      &kp R      &kp T   &kp Y &kp U      &kp I      &kp O      &kp P    &none
-   &kp TAB   &kp A &mt LGUI S &mt LCTL D &mt LALT F &kp G   &kp H &mt LALT J &mt LCTL K &mt RGUI L &kp SEMI &kp BSPC
+   &kp TAB   &kp A &hm LGUI S &hm LCTL D &hm LALT F &kp G   &kp H &hm LALT J &hm LCTL K &hm RGUI L &kp SEMI &kp BSPC
    &kp ESC   &kp Z &kp X      &kp C      &kp V      &kp B   &kp N &kp M      &kp COMMA  &kp DOT    &kp FSLH &kp ENTER
                 &mt LSHIFT BSPC &lt 3 SPACE &mo 2   &mo 1   &lt 3 SPACE      &mt RALT ENTER
             >;
