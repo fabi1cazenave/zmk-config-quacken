@@ -20,7 +20,7 @@
                 = <&macro_press &kp LCTL>
                 , <&macro_param_1to1>
                 , <&macro_tap &kp MACRO_PLACEHOLDER>
-                , <&macro_release &kp LCTL>
+                , <&macro_release &kp LCTL>;
         };
 
         ck_stab: shift_tab {
@@ -29,7 +29,7 @@
             bindings
                 = <&macro_press &kp LSHIFT>
                 , <&macro_tap &kp TAB>
-                , <&macro_release &kp LSHIFT>
+                , <&macro_release &kp LSHIFT>;
         };
     };
 
