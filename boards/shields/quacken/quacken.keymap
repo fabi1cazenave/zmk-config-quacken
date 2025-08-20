@@ -12,6 +12,27 @@
         };
     };
 
+    macros {
+        ck: command_key {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings
+                = <&macro_press &kp LCTL>
+                , <&macro_param_1to1>
+                , <&macro_tap &kp MACRO_PLACEHOLDER>
+                , <&macro_release &kp LCTL>
+        };
+
+        ck_stab: shift_tab {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LSHIFT>
+                , <&macro_tap &kp TAB>
+                , <&macro_release &kp LSHIFT>
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -30,7 +51,7 @@
             bindings = <
    &none &kp TAB    &kp HOME  &kp UP     &kp END     &kp PG_UP    &none  &kp N7 &kp N8 &kp N9 &none  &none
    &none &kp CAPS   &kp LEFT  &kp DOWN   &kp RIGHT   &kp PG_DN    &none  &kp N4 &kp N5 &kp N6 &kp N0 &none
-   &none &kp K_UNDO &kp K_CUT &kp K_COPY &kp K_PASTE &kp K_REDO   &none  &kp N1 &kp N2 &kp N3 &none  &none
+   &none &ck Z      &ck X     &ck C      &ck V       &ck_stab     &none  &kp N1 &kp N2 &kp N3 &none  &none
                               &trans     &trans      &trans       &trans &trans &trans
             >;
         };
@@ -48,9 +69,9 @@
         vim_nav {
             display-name = "VimNav";
             bindings = <
-   &none &kp CAPS   &kp C_AC_CLOSE &kp C_PREV &kp C_NEXT  &none       &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &none
-   &none &kp ESC    &kp C_AC_SAVE  &kp TAB    &kp TAB     &none       &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &none
-   &none &kp K_UNDO &kp K_CUT      &kp K_COPY &kp K_PASTE &none       &kp C_AC_ZOOM_IN &kp C_AC_SCROLL_DOWN  &kp C_AC_SCROLL_UP &kp C_AC_ZOOM_OUT &none &none
+   &none &kp CAPS  &ck T     &kp C_PREV &kp C_NEXT &none       &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &none
+   &none &ck A     &ck S     &ck_stab   &kp TAB    &none       &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &none
+   &none &ck Z     &ck X     &ck W      &ck V      &none       &kp C_AC_ZOOM_IN &kp C_AC_SCROLL_DOWN  &kp C_AC_SCROLL_UP &kp C_AC_ZOOM_OUT &none &none
                                    &trans     &trans      &trans      &trans   &trans    &trans
             >;
         };
