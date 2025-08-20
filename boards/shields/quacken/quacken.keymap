@@ -24,7 +24,7 @@
         };
 
         ck_stab: shift_tab {
-            compatible = "zmk,behavior-macro-one-param";
+            compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
                 = <&macro_press &kp LSHIFT>
