@@ -85,8 +85,7 @@
             bindings = <&macro_param_1to1>, <&macro_tap &sl MACRO_PLACEHOLDER>;
         };
 
-        // I mean, it wants everything at the same time
-        bls: bisexual_layer_switch {
+        bsl: better_sticky_layer { // like ZMK's `sl` but with a more robust timing
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <300>;
@@ -94,16 +93,6 @@
             bindings = <&mo>, <&osl>;
         };
     };
-
-    /*
-    conditional_layers {
-        compatible = "zmk,conditional-layers";
-        tri_layer {
-            if-layers = <1 2>;
-            then-layer = <3>;
-        };
-    };
-    */
 
     macros {
         cmd: command_key {
@@ -156,7 +145,7 @@
    &none     &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O   &kp P      &none
    &kp TAB   &kp A  HRM_S  HRM_D  HRM_F  &kp G        &kp H  HRM_J  HRM_K     HRM_L   &kp SEMI   &kp BSPC
    &kp ESC   &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &kp ENTER
-           &mt LSHIFT BSPC  &lt 4 SPACE  &lt 2 ESC    &mo 3  &lt 4 SPACE  &sc 1 ENTER
+                 &sk LSHIFT  &sc 4 BSPC  &sc 2 ESC    &sc 3 ENTER  &lt 4 SPACE  &bsl 1 1
             >;
         };
 
@@ -168,7 +157,7 @@
    &none S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &none
    &none S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &none
    &none S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &none
-                      &trans  &kp SPACE  &bls 2 2      &trans  &kp RALT  &trans
+                      &trans  &kp SPACE  &bsl 2 2      &trans  &kp RALT  &trans
             >;
         };
 
@@ -193,7 +182,7 @@
    &none &kp TAB  &kp HOME &kp UP   &kp END   &kp PG_UP          &none   &kp N7  &kp N8  &kp N9  S_FSLH  &none
    &none &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN          S_MINUS &kp N4  &kp N5  &kp N6  &kp N0  &none
    &none &cmd Z   &cmd X   &cmd W   &cmd V    &sh_tab            S_COMMA &kp N1  &kp N2  &kp N3  S_DOT   &none
-                           &trans   &mo 5     &trans             &trans  &mo 5   &trans
+                           &trans   &mo 5     &kp DEL            &trans  &mo 5   &trans
             >;
         };
 
@@ -206,7 +195,7 @@
    &none &kp CAPS &cmd T   &n_prev  &n_next  &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &none
    &none &cmd A   &cmd S   &sh_tab  &kp TAB  &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &none
    &none &cmd Z   &cmd X   &cmd W   &cmd V   &none        &none    &none     &none     &none     &none  &none
-                           &trans   &mo 5    &trans       &trans   &mo 5     &trans
+                           &trans   &trans   &trans       &trans   &trans    &trans
             >;
         };
 
