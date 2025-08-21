@@ -76,8 +76,26 @@
             flavor = "hold-preferred";
             bindings = <&mo>, <&kp>;
         };
+
+        osl: one_shot_layer {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings = <&macro_param_1to1>, <&macro_tap &sl MACRO_PLACEHOLDER>;
+        };
+
+        // I mean, it wants everything at the same time
+        bls: bisexual_layer_switch {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <300>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&osl>;
+        };
     };
 
+    /*
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer {
@@ -85,6 +103,7 @@
             then-layer = <3>;
         };
     };
+    */
 
     macros {
         cmd: command_key {
@@ -149,7 +168,7 @@
    &none S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &none
    &none S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &none
    &none S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &none
-                       &to 2  &kp SPACE  &trans        &trans  &kp RALT  &trans
+                      &trans  &kp SPACE  &bsl 2 2      &trans  &kp RALT  &trans
             >;
         };
 
