@@ -128,7 +128,7 @@
             display-name = "Symbols";
             bindings = <
    &none S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &none
-   &none S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLK  S_DQT    &none
+   &none S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &none
    &none S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &none
                        &mo 2  &kp SPACE  &trans        &trans  &kp RALT  &trans
             >;
@@ -173,7 +173,7 @@
         };
 
         // 5. Function layer -- F1..12 pad on the left hand, HRM on the right hand (with an additional Shift key)
-        //                   -- reset and bootloader reset on difficult thumb keys (XXX cancelled, not working)
+        //                   -- reset and bootloader reset on difficult thumb keys (XXX cancelled,)
         //                   -- could be completed with other rare keys
         function {
             display-name = "Function";
