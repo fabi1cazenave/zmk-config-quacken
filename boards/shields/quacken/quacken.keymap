@@ -78,6 +78,14 @@
         };
     };
 
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <1 2>;
+            then-layer = <3>;
+        };
+    };
+
     macros {
         cmd: command_key {
             compatible = "zmk,behavior-macro-one-param";
@@ -141,7 +149,7 @@
    &none S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &none
    &none S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &none
    &none S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &none
-                       &mo 2  &kp SPACE  &trans        &trans  &kp RALT  &trans
+                       &to 2  &kp SPACE  &trans        &trans  &kp RALT  &trans
             >;
         };
 
