@@ -48,9 +48,20 @@
 #define S_COMMA &kp DOT
 #define S_DOT   &kp N
 
+/**
+ * Home-Row Mods
+ */
+
+#define HRM_S &hrm LGUI S
+#define HRM_D &hrm LCTL D
+#define HRM_F &hrm LALT F
+#define HRM_J &hrm LALT J
+#define HRM_K &hrm RCTL K
+#define HRM_L &hrm RGUI L
+
 / {
     behaviors {
-        hm: homerow_mods {
+        hrm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <225>;
@@ -58,7 +69,7 @@
             bindings = <&kp>, <&kp>;
         };
 
-        sc: space_cadet {
+        sc: space_cadet { // same as lt, but with hold-preferred
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <225>;
@@ -115,10 +126,10 @@
         default_layer {
             display-name = "Base";
             bindings = <
-   &none     &kp Q &kp W      &kp E      &kp R      &kp T        &kp Y &kp U      &kp I      &kp O      &kp P    &none
-   &kp TAB   &kp A &hm LGUI S &hm LCTL D &hm LALT F &kp G        &kp H &hm LALT J &hm RCTL K &hm RGUI L &kp SEMI &kp BSPC
-   &kp ESC   &kp Z &kp X      &kp C      &kp V      &kp B        &kp N &kp M      &kp COMMA  &kp DOT    &kp FSLH &kp ENTER
-                      &mt LSHIFT BSPC  &lt 4 SPACE  &lt 2 ESC    &mo 3  &lt 4 SPACE  &sc 1 ENTER
+   &none     &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O   &kp P      &none
+   &kp TAB   &kp A  HRM_S  HRM_D  HRM_F  &kp G        &kp H  HRM_J  HRM_K     HRM_L   &kp SEMI   &kp BSPC
+   &kp ESC   &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &kp ENTER
+           &mt LSHIFT BSPC  &lt 4 SPACE  &lt 2 ESC    &mo 3  &lt 4 SPACE  &sc 1 ENTER
             >;
         };
 
