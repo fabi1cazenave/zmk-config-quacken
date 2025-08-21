@@ -147,7 +147,7 @@
         // 5. Function layer -- F1..12 pad on the left hand, HRM on the right hand (with an additional Shift key)
         //                   -- reset and bootloader reset on difficult thumb keys
         //                   -- could be completed with other rare keys
-        symbols {
+        function {
             display-name = "Function";
             bindings = <
    &none &kp F1  &kp F2  &kp F3  &kp F4  &none         &none &kp PAUSE_BREAK &kp PSCRN &kp SYSRQ &none      &none
