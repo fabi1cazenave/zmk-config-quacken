@@ -64,8 +64,8 @@
  */
 
 #define TAPPING_TERM 225
-&sl{ quick-release; } // seems useless (works fine without)
-&sk{ quick-release; } // must have (lots of false positives otherwise)
+&sl{ quick-release; }; // seems useless (works fine without)
+&sk{ quick-release; }; // must have (lots of false positives otherwise)
 
 / {
     behaviors {
