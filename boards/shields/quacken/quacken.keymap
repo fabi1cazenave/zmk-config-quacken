@@ -10,10 +10,18 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
+
+        sc: space_cadet {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <225>;
+            flavor = "hold-preferred";
+            bindings = <&mo>, <&kp>;
+        };
     };
 
     macros {
-        ck: command_key {
+        cmd: command_key {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
             bindings
@@ -23,7 +31,17 @@
                 , <&macro_release &kp LCTL>;
         };
 
-        ck_stab: shift_tab {
+        sym: symbol_key {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings
+                = <&macro_press &kp RALT>
+                , <&macro_param_1to1>
+                , <&macro_tap &kp MACRO_PLACEHOLDER>
+                , <&macro_release &kp RALT>;
+        };
+
+        sh_tab: shift_tab {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
@@ -31,48 +49,111 @@
                 , <&macro_tap &kp TAB>
                 , <&macro_release &kp LSHIFT>;
         };
+
+        sh_spc: shift_space {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LSHIFT>
+                , <&macro_tap &kp SPACE>
+                , <&macro_release &kp LSHIFT>;
+        };
+
+        n_prev: navigation_prev {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LALT>
+                , <&macro_tap &kp LEFT>
+                , <&macro_release &kp LALT>;
+        };
+
+        n_next: navigation_next {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LALT>
+                , <&macro_tap &kp RIGHT>
+                , <&macro_release &kp LALT>;
+        };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
+        // 0. Base layer -- keep the QWERTY key codes to use your OS keyboard layout
+        //               -- adjust the homerow mods according to your OS and preferences
+        //               -- the Space Cadet layer-tap on the right can be replaced by an AltGr/Enter mod-tap
         default_layer {
             display-name = "Base";
             bindings = <
-   &none     &kp Q &kp W      &kp E      &kp R      &kp T   &kp Y &kp U      &kp I      &kp O      &kp P    &none
-   &kp TAB   &kp A &hm LGUI S &hm LCTL D &hm LALT F &kp G   &kp H &hm LALT J &hm LCTL K &hm RGUI L &kp SEMI &kp BSPC
-   &kp ESC   &kp Z &kp X      &kp C      &kp V      &kp B   &kp N &kp M      &kp COMMA  &kp DOT    &kp FSLH &kp ENTER
-                &mt LSHIFT BSPC &lt 3 SPACE &mo 2   &mo 1   &lt 3 SPACE      &mt RALT ENTER
+   &none     &kp Q &kp W      &kp E      &kp R      &kp T        &kp Y &kp U      &kp I      &kp O      &kp P    &none
+   &kp TAB   &kp A &hm LGUI S &hm LCTL D &hm LALT F &kp G        &kp H &hm LALT J &hm LCTL K &hm RGUI L &kp SEMI &kp BSPC
+   &kp ESC   &kp Z &kp X      &kp C      &kp V      &kp B        &kp N &kp M      &kp COMMA  &kp DOT    &kp FSLH &kp ENTER
+                      &mt LSHIFT BSPC  &lt 3 SPACE  &mo 1        &mo 2  &lt 3 SPACE  &sc 4 ENTER
             >;
         };
 
-        num_nav {
-            display-name = "NumNav";
-            bindings = <
-   &none &kp TAB    &kp HOME  &kp UP     &kp END     &kp PG_UP    &none  &kp N7 &kp N8 &kp N9 &none  &none
-   &none &kp CAPS   &kp LEFT  &kp DOWN   &kp RIGHT   &kp PG_DN    &none  &kp N4 &kp N5 &kp N6 &kp N0 &none
-   &none &ck Z      &ck X     &ck C      &ck V       &ck_stab     &none  &kp N1 &kp N2 &kp N3 &none  &none
-                              &trans     &trans      &trans       &trans &trans &trans
-            >;
-        };
-
+        // 1. NumRow layer -- keep the QWERTY key codes to use your OS keyboard layout
+        //                 -- best used along with the VimNav layer
         num_row {
             display-name = "NumRow";
             bindings = <
    &none &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT       &kp CARET &kp AMPS  &kp STAR  &kp LPAR  &kp RPAR  &none
    &none &kp N1    &kp N2    &kp N3    &kp N4    &kp N5          &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &none
    &none &none     &none     &none     &none     &none           &none     &none     &none     &none     &none     &none
-                             &trans    &trans    &trans          &trans    &trans    &trans
+                             &trans    &sh_spc   &trans          &trans    &sh_spc   &trans
             >;
         };
 
+        // 2. NumNav layer -- inverted T arrow cluster on the left hand, numpad on the right hand
+        //                 -- can be the only extra layer you need if you're not too picky with number+symbols n-grams
+        //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
+        num_nav {
+            display-name = "NumNav";
+            bindings = <
+   &none &kp TAB  &kp HOME &kp UP   &kp END   &kp PG_UP          &none   &kp N7  &kp N8  &kp N9  &none   &none
+   &none &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN          &none   &kp N4  &kp N5  &kp N6  &kp N0  &none
+   &none &cmd Z   &cmd X   &cmd W   &cmd V    &sh_tab            &none   &kp N1  &kp N2  &kp N3  &none   &none
+                           &trans   &mo 5     &trans             &trans  &mo 5   &trans
+            >;
+        };
+
+        // 3. VimNav layer -- HJKL arrow cluster on the right hand
+        //                 -- best used along with the NumRow layer
+        //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
         vim_nav {
             display-name = "VimNav";
             bindings = <
-   &none &kp CAPS  &ck T     &kp C_PREV &kp C_NEXT &none       &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &none
-   &none &ck A     &ck S     &ck_stab   &kp TAB    &none       &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &none
-   &none &ck Z     &ck X     &ck W      &ck V      &none       &kp C_AC_ZOOM_IN &kp C_AC_SCROLL_DOWN  &kp C_AC_SCROLL_UP &kp C_AC_ZOOM_OUT &none &none
-                                   &trans     &trans      &trans      &trans   &trans    &trans
+   &none &kp CAPS &cmd T   &n_prev  &n_next  &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &none
+   &none &cmd A   &cmd S   &sh_tab  &kp TAB  &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &none
+   &none &cmd Z   &cmd X   &cmd W   &cmd V   &none        &none    &none     &none     &none     &none  &none
+                           &trans   &mo 5    &trans       &trans   &mo 5     &trans
+            >;
+        };
+
+        // 4. Symbols layer -- basically just an AltGr layer with custom thumb keys
+        //                  -- could be adjusted for non-AltGr layouts such as QWERTY-ANSI
+        symbols {
+            display-name = "Symbols";
+            bindings = <
+   &none &sym Q &sym W &sym E &sym R &sym T            &sym Y &sym U &sym I     &sym O   &sym P    &none
+   &none &sym A &sym S &sym D &sym F &sym G            &sym H &sym J &sym K     &sym L   &sym SEMI &none
+   &none &sym Z &sym X &sym C &sym V &sym B            &sym N &sym M &sym COMMA &sym DOT &sym FSLH &none
+                   &mo 1  &kp SPACE  &trans            &trans  &kp RALT  &trans
+            >;
+        };
+
+        // 5. Function layer -- F1..12 pad on the left hand, HRM on the right hand (with an additional Shift key)
+        //                   -- reset and bootloader reset on difficult thumb keys
+        //                   -- could be completed with other rare keys
+        symbols {
+            display-name = "Function";
+            bindings = <
+   &none &kp F1  &kp F2  &kp F3  &kp F4  &none         &none &kp PAUSE_BREAK &kp PSCRN &kp SYSRQ &none      &none
+   &none &kp F5  &kp F6  &kp F7  &kp F8  &none         &none &kp LALT        &kp RCTL  &kp RGUI  &kp RSHIFT &none
+   &none &kp F9  &kp F10 &kp F11 &kp F12 &none         &none &none           &none     &none     &none      &none
+                       &trans  &trans  &bootloader     &reset  &trans  &trans
             >;
         };
     };
