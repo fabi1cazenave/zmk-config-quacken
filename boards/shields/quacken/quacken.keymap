@@ -1,6 +1,8 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
+#define SYM_^ RA(Q)
+
 / {
     behaviors {
         hm: homerow_mods {
@@ -99,7 +101,7 @@
         symbols {
             display-name = "Symbols";
             bindings = <
-   &none &sym Q &sym W &sym E &sym R &sym T            &sym Y &sym U &sym I     &sym O   &sym P    &none
+   &none SYM_^  &sym W &sym E &sym R &sym T            &sym Y &sym U &sym I     &sym O   &sym P    &none
    &none &sym A &sym S &sym D &sym F &sym G            &sym H &sym J &sym K     &sym L   &sym SEMI &none
    &none &sym Z &sym X &sym C &sym V &sym B            &sym N &sym M &sym COMMA &sym DOT &sym FSLH &none
                    &mo 2  &kp SPACE  &trans            &trans  &kp RALT  &trans
