@@ -1,7 +1,52 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-#define S_AT &kp RA(Q)
+/**
+ * Arsenik Symbols:
+ *   ^<>$% @&*'`
+ *   {()}= \+-/"
+ *   ~[]_# |!;:?
+ */
+
+// first row
+#define S_CARET &kp RA(Q)
+#define S_LT    &kp RA(W)
+#define S_GT    &kp RA(E)
+#define S_DLLR  &kp RA(R)
+#define S_PRCNT &kp RA(T)
+#define S_AT    &kp RA(Y)
+#define S_AMPS  &kp RA(U)
+#define S_STAR  &kp RA(I)
+#define S_SQT   &kp RA(O)
+#define S_GRAVE &kp RA(P)
+
+// second row
+#define S_LBRC  &kp RA(A)
+#define S_LPAR  &kp RA(S)
+#define S_RPAR  &kp RA(D)
+#define S_RBRC  &kp RA(F)
+#define S_EQUAL &kp RA(G)
+#define S_BSLH  &kp RA(H)
+#define S_PLUS  &kp RA(J)
+#define S_MINUS &kp RA(K)
+#define S_FSLH  &kp RA(L)
+#define S_DQT   &kp RA(SEMI)
+
+// third row
+#define S_TILDE &kp RA(Z)
+#define S_LBKT  &kp RA(X)
+#define S_RBKT  &kp RA(C)
+#define S_UNDER &kp RA(V)
+#define S_HASH  &kp RA(B)
+#define S_PIPE  &kp RA(N)
+#define S_EXCL  &kp RA(M)
+#define S_SEMI  &kp RA(COMMA)
+#define S_COLON &kp RA(DOT)
+#define S_QMARK &kp RA(FSLH)
+
+// additional symbols (Ergol)
+#define S_COMMA &kp DOT
+#define S_DOT   &kp N
 
 / {
     behaviors {
@@ -33,31 +78,12 @@
                 , <&macro_release &kp LCTL>;
         };
 
-        sym: symbol_key {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            bindings
-                = <&macro_press &kp RALT>
-                , <&macro_param_1to1>
-                , <&macro_tap &kp MACRO_PLACEHOLDER>
-                , <&macro_release &kp RALT>;
-        };
-
         sh_tab: shift_tab {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
                 = <&macro_press &kp LSHIFT>
                 , <&macro_tap &kp TAB>
-                , <&macro_release &kp LSHIFT>;
-        };
-
-        sh_spc: shift_space {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp LSHIFT>
-                , <&macro_tap &kp SPACE>
                 , <&macro_release &kp LSHIFT>;
         };
 
@@ -101,10 +127,10 @@
         symbols {
             display-name = "Symbols";
             bindings = <
-   &none S_AT   &sym W &sym E &sym R &sym T            &sym Y &sym U &sym I     &sym O   &sym P    &none
-   &none &sym A &sym S &sym D &sym F &sym G            &sym H &sym J &sym K     &sym L   &sym SEMI &none
-   &none &sym Z &sym X &sym C &sym V &sym B            &sym N &sym M &sym COMMA &sym DOT &sym FSLH &none
-                   &mo 2  &kp SPACE  &trans            &trans  &kp RALT  &trans
+   &none S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &none
+   &none S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLK  S_DQT    &none
+   &none S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &none
+                       &mo 2  &kp SPACE  &trans        &trans  &kp RALT  &trans
             >;
         };
 
@@ -113,10 +139,10 @@
         num_row {
             display-name = "NumRow";
             bindings = <
-   &none &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT       &kp CARET &kp AMPS  &kp STAR  &kp LPAR  &kp RPAR  &none
-   &none &kp N1    &kp N2    &kp N3    &kp N4    &kp N5          &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &none
-   &none &none     &none     &none     &none     &none           &none     &none     &none     &none     &none     &none
-                             &trans    &sh_spc   &trans          &trans    &sh_spc   &trans
+   &none &kp RS(N1) &kp RS(N2) &kp RS(N3) &kp RS(N4) &kp RS(N5)       &kp LS(N6) &kp LS(N7) &kp LS(N8) &kp LS(N9) &kp LS(N0) &none
+   &none &kp N1     &kp N2     &kp N3     &kp N4     &kp N5           &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
+   &none &none      &none      &none      &none      &none            S_MINUS    S_COMMA    S_DOT      S_COLON    S_FSLH     &none
+                              &trans  &kp RS(SPACE)  &trans           &trans  &kp LS(SPACE)  &trans
             >;
         };
 
@@ -126,9 +152,9 @@
         num_nav {
             display-name = "NumNav";
             bindings = <
-   &none &kp TAB  &kp HOME &kp UP   &kp END   &kp PG_UP          &none   &kp N7  &kp N8  &kp N9  &none   &none
-   &none &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN          &none   &kp N4  &kp N5  &kp N6  &kp N0  &none
-   &none &cmd Z   &cmd X   &cmd W   &cmd V    &sh_tab            &none   &kp N1  &kp N2  &kp N3  &none   &none
+   &none &kp TAB  &kp HOME &kp UP   &kp END   &kp PG_UP          &none   &kp N7  &kp N8  &kp N9  S_FSLH  &none
+   &none &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN          S_MINUS &kp N4  &kp N5  &kp N6  &kp N0  &none
+   &none &cmd Z   &cmd X   &cmd W   &cmd V    &sh_tab            S_COMMA &kp N1  &kp N2  &kp N3  S_DOT   &none
                            &trans   &mo 5     &trans             &trans  &mo 5   &trans
             >;
         };
@@ -147,7 +173,7 @@
         };
 
         // 5. Function layer -- F1..12 pad on the left hand, HRM on the right hand (with an additional Shift key)
-        //                   -- reset and bootloader reset on difficult thumb keys
+        //                   -- reset and bootloader reset on difficult thumb keys (XXX cancelled, not working)
         //                   -- could be completed with other rare keys
         function {
             display-name = "Function";
