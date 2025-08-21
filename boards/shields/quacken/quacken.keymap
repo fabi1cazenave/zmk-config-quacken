@@ -59,24 +59,26 @@
 #define HRM_K &hrm RCTL K
 #define HRM_L &hrm RGUI L
 
+#define TAPPING_TERM 225
+
 / {
     behaviors {
         hrm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <225>;
+            tapping-term-ms = <TAPPING_TERM>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
-
         sc: space_cadet { // same as lt, but with hold-preferred
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <225>;
+            tapping-term-ms = <TAPPING_TERM>;
             flavor = "hold-preferred";
             bindings = <&mo>, <&kp>;
         };
 
+        // like ZMK's sticky layer (sl) but with a more robust timing
         osl: one_shot_layer {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
@@ -84,13 +86,28 @@
             wait-ms = <0>;
             bindings = <&macro_param_1to1>, <&macro_tap &sl MACRO_PLACEHOLDER>;
         };
-
-        bsl: better_sticky_layer { // like ZMK's `sl` but with a more robust timing
+        bsl: better_sticky_layer {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <TAPPING_TERM>;
             flavor = "tap-preferred";
             bindings = <&mo>, <&osl>;
+        };
+
+        // like ZMK's sticky key (sk) but with a more robust timing
+        osm: one_shot_modifier {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings = <&macro_param_1to1>, <&macro_tap &sk MACRO_PLACEHOLDER>;
+        };
+        bsk: better_sticky_key {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <TAPPING_TERM>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&osm>;
         };
     };
 
@@ -145,7 +162,7 @@
    &none     &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O   &kp P      &none
    &kp TAB   &kp A  HRM_S  HRM_D  HRM_F  &kp G        &kp H  HRM_J  HRM_K     HRM_L   &kp SEMI   &kp BSPC
    &kp ESC   &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &kp ENTER
-                 &sk LSHIFT  &sc 4 BSPC  &sc 2 ESC    &sc 3 ENTER  &lt 4 SPACE  &bsl 1 1
+                &bsk LSHIFT  &sc 4 BSPC  &sc 2 ESC    &sc 3 ENTER  &lt 4 SPACE  &bsl 1 1
             >;
         };
 
