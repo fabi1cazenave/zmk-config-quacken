@@ -29,7 +29,7 @@
 #define S_BSLH  &kp RA(H)
 #define S_PLUS  &kp RA(J)
 #define S_MINUS &kp RA(K)
-#define S_FSLH  &kp RA(L)
+#define S_FSLH  &kp RA(L)
 #define S_DQT   &kp RA(SEMI)
 
 // third row
