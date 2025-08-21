@@ -90,11 +90,23 @@
    &none     &kp Q &kp W      &kp E      &kp R      &kp T        &kp Y &kp U      &kp I      &kp O      &kp P    &none
    &kp TAB   &kp A &hm LGUI S &hm LCTL D &hm LALT F &kp G        &kp H &hm LALT J &hm RCTL K &hm RGUI L &kp SEMI &kp BSPC
    &kp ESC   &kp Z &kp X      &kp C      &kp V      &kp B        &kp N &kp M      &kp COMMA  &kp DOT    &kp FSLH &kp ENTER
-                      &mt LSHIFT BSPC  &lt 3 SPACE  &mo 1        &mo 2  &lt 3 SPACE  &sc 4 ENTER
+                      &mt LSHIFT BSPC  &lt 4 SPACE  &mo 2        &mo 3  &lt 4 SPACE  &sc 1 ENTER
             >;
         };
 
-        // 1. NumRow layer -- keep the QWERTY key codes to use your OS keyboard layout
+        // 1. Symbols layer -- basically just an AltGr layer with custom thumb keys
+        //                  -- could be adjusted for non-AltGr layouts such as QWERTY-ANSI
+        symbols {
+            display-name = "Symbols";
+            bindings = <
+   &none &sym Q &sym W &sym E &sym R &sym T            &sym Y &sym U &sym I     &sym O   &sym P    &none
+   &none &sym A &sym S &sym D &sym F &sym G            &sym H &sym J &sym K     &sym L   &sym SEMI &none
+   &none &sym Z &sym X &sym C &sym V &sym B            &sym N &sym M &sym COMMA &sym DOT &sym FSLH &none
+                   &mo 2  &kp SPACE  &trans            &trans  &kp RALT  &trans
+            >;
+        };
+
+        // 2. NumRow layer -- keep the QWERTY key codes to use your OS keyboard layout
         //                 -- best used along with the VimNav layer
         num_row {
             display-name = "NumRow";
@@ -106,7 +118,7 @@
             >;
         };
 
-        // 2. NumNav layer -- inverted T arrow cluster on the left hand, numpad on the right hand
+        // 3. NumNav layer -- inverted T arrow cluster on the left hand, numpad on the right hand
         //                 -- can be the only extra layer you need if you're not too picky with number+symbols n-grams
         //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
         num_nav {
@@ -119,7 +131,7 @@
             >;
         };
 
-        // 3. VimNav layer -- HJKL arrow cluster on the right hand
+        // 4. VimNav layer -- HJKL arrow cluster on the right hand
         //                 -- best used along with the NumRow layer
         //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
         vim_nav {
@@ -129,18 +141,6 @@
    &none &cmd A   &cmd S   &sh_tab  &kp TAB  &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &none
    &none &cmd Z   &cmd X   &cmd W   &cmd V   &none        &none    &none     &none     &none     &none  &none
                            &trans   &mo 5    &trans       &trans   &mo 5     &trans
-            >;
-        };
-
-        // 4. Symbols layer -- basically just an AltGr layer with custom thumb keys
-        //                  -- could be adjusted for non-AltGr layouts such as QWERTY-ANSI
-        symbols {
-            display-name = "Symbols";
-            bindings = <
-   &none &sym Q &sym W &sym E &sym R &sym T            &sym Y &sym U &sym I     &sym O   &sym P    &none
-   &none &sym A &sym S &sym D &sym F &sym G            &sym H &sym J &sym K     &sym L   &sym SEMI &none
-   &none &sym Z &sym X &sym C &sym V &sym B            &sym N &sym M &sym COMMA &sym DOT &sym FSLH &none
-                   &mo 1  &kp SPACE  &trans            &trans  &kp RALT  &trans
             >;
         };
 
