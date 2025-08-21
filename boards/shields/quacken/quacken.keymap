@@ -1,7 +1,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-#define S_AT RA(Q)
+#define S_AT &kp RA(Q)
 
 / {
     behaviors {
