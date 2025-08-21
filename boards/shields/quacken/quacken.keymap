@@ -107,7 +107,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <TAPPING_TERM>;
             flavor = "tap-preferred";
-            bindings = <&mo>, <&osm>;
+            bindings = <&kp>, <&osm>;
         };
     };
 
@@ -162,7 +162,7 @@
    &none     &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O   &kp P      &none
    &kp TAB   &kp A  HRM_S  HRM_D  HRM_F  &kp G        &kp H  HRM_J  HRM_K     HRM_L   &kp SEMI   &kp BSPC
    &kp ESC   &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &kp ENTER
-        &bsk LSHIFT LSHIFT  L&sc 4 BSPC  &sc 2 ESC    &sc 3 ENTER  &lt 4 SPACE  &bsl 1 1
+         &bsk LSHIFT LSHIFT  &sc 4 BSPC  &sc 2 ESC    &sc 3 ENTER  &lt 4 SPACE  &bsl 1 1
             >;
         };
 
