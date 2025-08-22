@@ -5,7 +5,7 @@
  */
 
 #ifndef CMD
-#define CMD RC // assume PC shortcuts by default
+#define CMD RC // assume PC shortcuts by default (Ctrl key)
 #endif
 
 #define X_UNDO  &kp CMD(Z)

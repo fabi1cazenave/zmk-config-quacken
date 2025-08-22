@@ -4,8 +4,8 @@
 #define CMD RC // PC
 // #define CMD RG // Mac
 
-#include "actions_ergol.h"
-#include "symbols_ergol.h"
+#include "actions.h"
+#include "symbols.h"
 
 #define HRM // comment this line to disable home-row mods
 #define TAPPING_TERM 225

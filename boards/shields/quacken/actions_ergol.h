@@ -4,19 +4,17 @@
  * Action Combos
  */
 
-#define CMD RC // PC
-// #define CMD RG // Mac
+#ifndef CMD
+#define CMD RC // assume PC shortcuts by default (Ctrl key)
+#endif
 
 #define X_UNDO  &kp CMD(Z)
 #define X_CUT   &kp CMD(X)
-// #define X_COPY  &kp CMD(C)
-#define X_COPY  &kp CMD(W) // Ergol
+#define X_COPY  &kp CMD(W)
 #define X_PASTE &kp CMD(V)
-// #define X_REDO  &kp CMD(Y)
-#define X_REDO  &kp CMD(P) // Ergol
+#define X_REDO  &kp CMD(P)
 
-// #define X_CLOSE &kp CMD(W)
-#define X_CLOSE &kp CMD(T) // Ergol
+#define X_CLOSE &kp CMD(T)
 #define X_SAVE  &kp CMD(S)
 #define X_ALL   &kp CMD(A)
 
