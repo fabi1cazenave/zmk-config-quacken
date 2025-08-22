@@ -160,8 +160,8 @@
         compatible = "zmk,keymap";
 
         // 0. Base layer -- keep the QWERTY key codes to use your OS keyboard layout
-        //               -- adjust the homerow mods according to your OS and preferences
         //               -- the Space Cadet layer-tap on the right can be replaced by an AltGr/Enter mod-tap
+        //               -- adjust the homerow mods with the #define statements above
         default_layer {
             display-name = "Base";
             bindings = <
@@ -173,26 +173,27 @@
         };
 
         // 1. Symbols layer -- basically just an AltGr layer with custom thumb keys
-        //                  -- could be adjusted for non-AltGr layouts such as QWERTY-ANSI
+        //                  -- can be redefined for non-AltGr layouts such as QWERTY-ANSI
         symbols {
             display-name = "Symbols";
             bindings = <
-   &none S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &none
-   &none S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &none
-   &none S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &none
-                      &trans  &kp SPACE  &bsl 2 2      &trans  &kp RALT  &trans
+   &none  S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &none
+   &none  S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &none
+   &none  S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &none
+                       &trans  &kp SPACE  &bsl 2 2      &trans  &kp RALT  &trans
             >;
         };
 
-        // 2. NumRow layer -- keep the QWERTY key codes to use your OS keyboard layout
+        // 2. NumRow layer -- bring the numbers to the homerow, keep shift+numbers for shortcuts and symbols
+        //                 -- space becomes shift+space, which is a no-break space with some OS layouts (e.g. Ergol)
         //                 -- best used along with the VimNav layer
         num_row {
             display-name = "NumRow";
             bindings = <
-   &none &kp RS(N1) &kp RS(N2) &kp RS(N3) &kp RS(N4) &kp RS(N5)       &kp LS(N6) &kp LS(N7) &kp LS(N8) &kp LS(N9) &kp LS(N0) &none
-   &none &kp N1     &kp N2     &kp N3     &kp N4     &kp N5           &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
-   &none &none      &none      &none      &none      &none            S_MINUS    S_COMMA    S_DOT      S_COLON    S_FSLH     &none
-                              &trans  &kp RS(SPACE)  &trans           &trans  &kp LS(SPACE)  &trans
+   &none  &kp RS(N1) &kp RS(N2) &kp RS(N3) &kp RS(N4) &kp RS(N5)       &kp LS(N6) &kp LS(N7) &kp LS(N8) &kp LS(N9) &kp LS(N0) &none
+   &none  &kp N1     &kp N2     &kp N3     &kp N4     &kp N5           &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
+   &none  &none      &none      &none      &none      &none            S_MINUS    S_COMMA    S_DOT      S_COLON    S_FSLH     &none
+                               &trans  &kp RS(SPACE)  &trans           &trans  &kp LS(SPACE)  &trans
             >;
         };
 
@@ -202,10 +203,10 @@
         num_nav {
             display-name = "NumNav";
             bindings = <
-   &none &kp TAB  &kp HOME &kp UP   &kp END   &kp PG_UP          &none   &kp N7  &kp N8  &kp N9  S_FSLH  &none
-   &none &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN          S_MINUS &kp N4  &kp N5  &kp N6  &kp N0  &none
-   &none &cmd Z   &cmd X   &cmd W   &cmd V    &sh_tab            S_COMMA &kp N1  &kp N2  &kp N3  S_DOT   &none
-                           &trans   &mo 5     &kp DEL            &trans  &mo 5   &trans
+   &none  &kp TAB  &kp HOME &kp UP   &kp END   &kp PG_UP          &none   &kp N7  &kp N8  &kp N9  S_FSLH  &none
+   &none  &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN          S_MINUS &kp N4  &kp N5  &kp N6  &kp N0  &none
+   &none  &cmd Z   &cmd X   &cmd W   &cmd V    &sh_tab            S_COMMA &kp N1  &kp N2  &kp N3  S_DOT   &none
+                            &trans   &lt 5 DEL &trans             &trans  &mo 5   &trans
             >;
         };
 
@@ -215,10 +216,10 @@
         vim_nav {
             display-name = "VimNav";
             bindings = <
-   &none &kp CAPS &cmd T   &n_prev  &n_next  &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &none
-   &none &cmd A   &cmd S   &sh_tab  &kp TAB  &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &none
-   &none &cmd Z   &cmd X   &cmd W   &cmd V   &none        &none    &none     &none     &none     &none  &none
-                           &trans   &trans   &trans       &trans   &trans    &trans
+   &none  &kp CAPS &cmd T   &n_prev  &n_next   &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &none
+   &none  &cmd A   &cmd S   &sh_tab  &kp TAB   &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &none
+   &none  &cmd Z   &cmd X   &cmd W   &cmd V    &none        &none    &none     &none     &none     &none  &none
+                            &trans   &lt 5 DEL &trans       &trans   &mo 5     &trans
             >;
         };
 
@@ -228,10 +229,10 @@
         function {
             display-name = "Function";
             bindings = <
-   &none &kp F1  &kp F2  &kp F3  &kp F4  &none         &none &kp PAUSE_BREAK &kp PSCRN &kp SYSREQ &none      &none
-   &none &kp F5  &kp F6  &kp F7  &kp F8  &none         &none &kp LALT        &kp RCTL  &kp RGUI   &kp RSHIFT &none
-   &none &kp F9  &kp F10 &kp F11 &kp F12 &none         &none &none           &none     &none      &none      &none
-                         &trans  &trans  &bootloader   &sys_reset  &trans  &trans
+   &none  &kp F1  &kp F2  &kp F3  &kp F4  &none         &none &kp PAUSE_BREAK &kp PSCRN &kp SYSREQ &none      &none
+   &none  &kp F5  &kp F6  &kp F7  &kp F8  &none         &none &kp LALT        &kp RCTL  &kp RGUI   &kp RSHIFT &none
+   &none  &kp F9  &kp F10 &kp F11 &kp F12 &none         &none &none           &none     &none      &none      &none
+                          &trans  &trans  &bootloader   &sys_reset  &trans  &trans
             >;
         };
     };
