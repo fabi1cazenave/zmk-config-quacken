@@ -155,7 +155,7 @@
    &none     &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O   &kp P      &none
    &kp TAB   &kp A  HRM_S  HRM_D  HRM_F  &kp G        &kp H  HRM_J  HRM_K     HRM_L   &kp SEMI   &kp BSPC
    &kp ESC   &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &kp ENTER
-              EZ_SK(LSHIFT)  &sc 4 BSPC  &sc 2 ESC    &sc 3 ENTER  &lt 4 SPACE  EZ_SL(1)
+         &bsk LSHIFT LSHIFT  &sc 4 BSPC  &sc 2 ESC    &sc 3 ENTER  &lt 4 SPACE  &bsl 1 1
             >;
         };
 
@@ -167,7 +167,7 @@
    &none  S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &none
    &none  S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &none
    &none  S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &none
-                       &trans  &kp SPACE  EZ_SL(2)      &trans  &kp RALT  &trans
+                       &trans  &kp SPACE  &bsl 2 2      &trans  &kp RALT  &trans
             >;
         };
 
