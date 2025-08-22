@@ -6,6 +6,9 @@
 
 #include "actions_ergol.h"
 #include "symbols_ergol.h"
+
+#define HRM // comment this line to disable home-row mods
+#define TAPPING_TERM 225
 #include "timing.h"
 
 / {

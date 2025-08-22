@@ -5,18 +5,30 @@
  * Home-Row Mods
  */
 
+#ifndef HRM
+#define HRM_S &kp S
+#define HRM_D &kp D
+#define HRM_F &kp F
+#define HRM_J &kp J
+#define HRM_K &kp K
+#define HRM_L &kp L
+#else
 #define HRM_S &hrm LGUI S
 #define HRM_D &hrm LCTL D
 #define HRM_F &hrm LALT F
 #define HRM_J &hrm LALT J
 #define HRM_K &hrm RCTL K
 #define HRM_L &hrm RGUI L
+#endif
 
 /**
  * Timing is Key!
  */
 
-#define TAPPING_TERM 225
+#ifndef TAPPING_TERM
+#define TAPPING_TERM 300
+#endif
+
 #define EZ_SL(layer) bsl (layer) (layer)
 #define EZ_SK(mod)   bsk (mod) (mod)
 &sl{ quick-release; }; // seems useless (works fine without)
