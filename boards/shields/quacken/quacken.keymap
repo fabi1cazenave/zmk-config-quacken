@@ -1,15 +1,20 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-#define CMD RC // PC
-// #define CMD RG // Mac
-
-#include "actions.h"
-#include "symbols.h"
-
+// Timing is key.
 #define HRM // comment this line to disable home-row mods
 #define TAPPING_TERM 225
 #include "timing.h"
+
+// Layout-specific actions and symbols.
+#define CMD RC // PC
+// #define CMD RG // Mac
+// This is a sane default for most US layouts:
+// #include "actions.h"
+// #include "symbols.h"
+// Other layouts can adjust accordingly:
+#include "actions_ergol.h"
+#include "symbols_ergol.h"
 
 / {
     keymap {
@@ -21,7 +26,7 @@
         default_layer {
             display-name = "Base";
             bindings = <
-   &none     &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O   &kp P      &none
+   &trans    &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O   &kp P      &trans
    &kp TAB   &kp A  HRM_S  HRM_D  HRM_F  &kp G        &kp H  HRM_J  HRM_K     HRM_L   &kp SEMI   &kp BSPC
    &kp ESC   &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &kp ENTER
          &bsk LSHIFT LSHIFT  &sc 4 BSPC  &sc 2 ESC    &sc 3 ENTER  &lt 4 SPACE  &bsl 1 1
@@ -33,10 +38,10 @@
         symbols {
             display-name = "Symbols";
             bindings = <
-   &none  S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &none
-   &none  S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &none
-   &none  S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &none
-                       &trans  &kp SPACE  &bsl 2 2      &trans  &kp RALT  &trans
+   &trans  S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &trans
+   &trans  S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &trans
+   &trans  S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &trans
+                        &trans  &kp SPACE  &bsl 2 2      &trans  &kp RALT  &trans
             >;
         };
 
@@ -46,10 +51,10 @@
         num_row {
             display-name = "NumRow";
             bindings = <
-   &none  &kp RS(N1) &kp RS(N2) &kp RS(N3) &kp RS(N4) &kp RS(N5)       &kp LS(N6) &kp LS(N7) &kp LS(N8) &kp LS(N9) &kp LS(N0) &none
-   &none  &kp N1     &kp N2     &kp N3     &kp N4     &kp N5           &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
-   &none  &none      &none      &none      &none      &none            S_MINUS    S_COMMA    S_DOT      S_COLON    S_FSLH     &none
-                               &trans  &kp RS(SPACE)  &trans           &trans  &kp LS(SPACE)  &trans
+   &trans  &kp RS(N1) &kp RS(N2) &kp RS(N3) &kp RS(N4) &kp RS(N5)       &kp LS(N6) &kp LS(N7) &kp LS(N8) &kp LS(N9) &kp LS(N0) &trans
+   &trans  &kp N1     &kp N2     &kp N3     &kp N4     &kp N5           &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &trans
+   &trans  &none      &none      &none      &none      &none            S_MINUS    S_COMMA    S_DOT      S_COLON    S_FSLH     &trans
+                                &trans  &kp RS(SPACE)  &trans           &trans  &kp LS(SPACE)  &trans
             >;
         };
 
@@ -59,10 +64,10 @@
         num_nav {
             display-name = "NumNav";
             bindings = <
-   &none  &kp TAB  &kp HOME &kp UP   &kp END   &kp PG_UP          &none   &kp N7  &kp N8  &kp N9  S_FSLH  &none
-   &none  &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN          S_MINUS &kp N4  &kp N5  &kp N6  &kp N0  &none
-   &none  X_UNDO   X_CUT    X_COPY   X_PASTE   X_SHTAB            S_COMMA &kp N1  &kp N2  &kp N3  S_DOT   &none
-                            &trans   &lt 5 DEL &trans             &trans  &mo 5   &trans
+   &trans  &kp TAB  &kp HOME &kp UP   &kp END   &kp PG_UP          &none   &kp N7  &kp N8  &kp N9  S_FSLH  &trans
+   &trans  &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN          S_MINUS &kp N4  &kp N5  &kp N6  &kp N0  &trans
+   &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_SHTAB            S_COMMA &kp N1  &kp N2  &kp N3  S_DOT   &trans
+                             &trans   &lt 5 DEL &trans             &trans  &mo 5   &trans
             >;
         };
 
@@ -72,10 +77,10 @@
         vim_nav {
             display-name = "VimNav";
             bindings = <
-   &none  &kp CAPS X_CLOSE  X_PREV   X_NEXT    &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &none
-   &none  X_ALL    X_SAVE   X_SHTAB  &kp TAB   &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &none
-   &none  X_UNDO   X_CUT    X_COPY   X_PASTE   X_REDO       &none    &none     &none     &none     &none  &none
-                            &trans   &lt 5 DEL &trans       &trans   &mo 5     &trans
+   &trans  &kp CAPS X_CLOSE  X_PREV   X_NEXT    &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &trans
+   &trans  X_ALL    X_SAVE   X_SHTAB  &kp TAB   &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &trans
+   &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_REDO       &none    &none     &none     &none     &none  &trans
+                             &trans   &lt 5 DEL &trans       &trans   &mo 5     &trans
             >;
         };
 
@@ -85,10 +90,10 @@
         function {
             display-name = "Function";
             bindings = <
-   &none  &kp F1  &kp F2  &kp F3  &kp F4  &none         &none &kp PAUSE_BREAK &kp PSCRN &kp SYSREQ &none      &none
-   &none  &kp F5  &kp F6  &kp F7  &kp F8  &none         &none &kp LALT        &kp RCTL  &kp RGUI   &kp RSHIFT &none
-   &none  &kp F9  &kp F10 &kp F11 &kp F12 &none         &none &none           &none     &none      &none      &none
-                          &trans  &trans  &bootloader   &sys_reset  &trans  &trans
+   &trans  &kp F1  &kp F2  &kp F3  &kp F4  &none         &none &kp PAUSE_BREAK &kp PSCRN &kp SYSREQ &none      &trans
+   &trans  &kp F5  &kp F6  &kp F7  &kp F8  &none         &none &kp LALT        &kp RCTL  &kp RGUI   &kp RSHIFT &trans
+   &trans  &kp F9  &kp F10 &kp F11 &kp F12 &none         &none &none           &none     &none      &none      &trans
+                           &trans  &trans  &bootloader   &sys_reset  &trans  &trans
             >;
         };
     };
