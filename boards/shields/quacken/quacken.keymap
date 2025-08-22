@@ -49,6 +49,30 @@
 #define S_DOT   &kp N
 
 /**
+ * Action Combos
+ */
+
+#define CMD RC // PC
+// #define CMD RG // Mac
+
+#define X_UNDO  &kp CMD(Z)
+#define X_CUT   &kp CMD(X)
+// #define X_COPY  &kp CMD(C)
+#define X_COPY  &kp CMD(W) // Ergol
+#define X_PASTE &kp CMD(V)
+// #define X_REDO  &kp CMD(Y)
+#define X_REDO  &kp CMD(P) // Ergol
+
+// #define X_CLOSE &kp CMD(W)
+#define X_CLOSE &kp CMD(T) // Ergol
+#define X_SAVE  &kp CMD(S)
+#define X_ALL   &kp CMD(A)
+
+#define X_SHTAB &kp RS(TAB)
+#define X_PREV  &kp LA(LEFT)
+#define X_NEXT  &kp LA(RIGHT)
+
+/**
  * Home-Row Mods
  */
 
@@ -64,6 +88,8 @@
  */
 
 #define TAPPING_TERM 225
+#define EZ_SL(layer) bsl (layer) (layer)
+#define EZ_SK(mod)   bsk (mod) (mod)
 &sl{ quick-release; }; // seems useless (works fine without)
 &sk{ quick-release; }; // must have (lots of false positives otherwise)
 
@@ -117,45 +143,6 @@
         };
     };
 
-    macros {
-        cmd: command_key {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            bindings
-                = <&macro_press &kp LCTL>
-                , <&macro_param_1to1>
-                , <&macro_tap &kp MACRO_PLACEHOLDER>
-                , <&macro_release &kp LCTL>;
-        };
-
-        sh_tab: shift_tab {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp LSHIFT>
-                , <&macro_tap &kp TAB>
-                , <&macro_release &kp LSHIFT>;
-        };
-
-        n_prev: navigation_prev {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp LALT>
-                , <&macro_tap &kp LEFT>
-                , <&macro_release &kp LALT>;
-        };
-
-        n_next: navigation_next {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp LALT>
-                , <&macro_tap &kp RIGHT>
-                , <&macro_release &kp LALT>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
@@ -168,11 +155,11 @@
    &none     &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O   &kp P      &none
    &kp TAB   &kp A  HRM_S  HRM_D  HRM_F  &kp G        &kp H  HRM_J  HRM_K     HRM_L   &kp SEMI   &kp BSPC
    &kp ESC   &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &kp ENTER
-         &bsk LSHIFT LSHIFT  &sc 4 BSPC  &sc 2 ESC    &sc 3 ENTER  &lt 4 SPACE  &bsl 1 1
+              EZ_SK(LSHIFT)  &sc 4 BSPC  &sc 2 ESC    &sc 3 ENTER  &lt 4 SPACE  EZ_SL(1)
             >;
         };
 
-        // 1. Symbols layer -- basically just an AltGr layer with custom thumb keys
+        // 1. Symbols layer -- with Ergol, basically just an AltGr layer with custom thumb keys
         //                  -- can be redefined for non-AltGr layouts such as QWERTY-ANSI
         symbols {
             display-name = "Symbols";
@@ -180,7 +167,7 @@
    &none  S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &none
    &none  S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &none
    &none  S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &none
-                       &trans  &kp SPACE  &bsl 2 2      &trans  &kp RALT  &trans
+                       &trans  &kp SPACE  EZ_SL(2)      &trans  &kp RALT  &trans
             >;
         };
 
@@ -205,7 +192,7 @@
             bindings = <
    &none  &kp TAB  &kp HOME &kp UP   &kp END   &kp PG_UP          &none   &kp N7  &kp N8  &kp N9  S_FSLH  &none
    &none  &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN          S_MINUS &kp N4  &kp N5  &kp N6  &kp N0  &none
-   &none  &cmd Z   &cmd X   &cmd W   &cmd V    &sh_tab            S_COMMA &kp N1  &kp N2  &kp N3  S_DOT   &none
+   &none  X_UNDO   X_CUT    X_COPY   X_PASTE   X_SHTAB            S_COMMA &kp N1  &kp N2  &kp N3  S_DOT   &none
                             &trans   &lt 5 DEL &trans             &trans  &mo 5   &trans
             >;
         };
@@ -216,9 +203,9 @@
         vim_nav {
             display-name = "VimNav";
             bindings = <
-   &none  &kp CAPS &cmd T   &n_prev  &n_next   &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &none
-   &none  &cmd A   &cmd S   &sh_tab  &kp TAB   &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &none
-   &none  &cmd Z   &cmd X   &cmd W   &cmd V    &none        &none    &none     &none     &none     &none  &none
+   &none  &kp CAPS X_CLOSE  X_PREV   X_NEXT    &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &none
+   &none  X_ALL    X_SAVE   X_SHTAB  &kp TAB   &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &none
+   &none  X_UNDO   X_CUT    X_COPY   X_PASTE   X_REDO       &none    &none     &none     &none     &none  &none
                             &trans   &lt 5 DEL &trans       &trans   &mo 5     &trans
             >;
         };
