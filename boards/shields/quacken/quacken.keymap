@@ -25,7 +25,7 @@
             wait-ms = <0>;
             bindings = <&macro_tap &kp LBKT>, <&macro_tap &kp MACRO_PLACEHOLDER>;
         };
-    },
+    };
     keymap {
         compatible = "zmk,keymap";
 
