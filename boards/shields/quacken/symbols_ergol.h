@@ -20,7 +20,7 @@
     #define S_EQUAL &kp EQUAL
     #define S_BSLH  &kp BSLH
     #define S_PLUS  &kp PLUS
-    #define S_MINUS &kp FSLH
+    #define S_MINUS &kp C
     #define S_FSLH  &kp MINUS
     #define S_DQT   &kp DQT
     // third row
@@ -30,10 +30,10 @@
     #define S_UNDER &kp UNDER
     #define S_HASH  &kp LPAR
     #define S_PIPE  &kp PIPE
-    #define S_EXCL  &kp EXCL
-    #define S_SEMI  &kp SEMI
-    #define S_COLON &kp COLON
-    #define S_QMARK &kp QMARK
+    #define S_EXCL  &kp RA(M)
+    #define S_SEMI  &kp RA(COMMA)
+    #define S_COLON &kp RA(DOT)
+    #define S_QMARK &kp RA(FSLH)
 #endif
 
 #define S_COMMA &kp DOT
