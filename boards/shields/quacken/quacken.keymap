@@ -23,7 +23,7 @@
             #binding-cells = <1>;
             tap-ms = <0>;
             wait-ms = <0>;
-            bindings = <&macro_tap &kp LBKT>, <&macro_tap &kp MACRO_PLACEHOLDER>;
+            bindings = <&macro_param_1to1>, <&macro_tap &kp LBKT &kp MACRO_PLACEHOLDER>;
         };
     };
     keymap {
