@@ -1,6 +1,8 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
+// clang-format off
+
 /**
  * Home-Row Mods
  */
@@ -35,52 +37,52 @@
 &sk{ quick-release; }; // must have (lots of false positives otherwise)
 
 / {
-    behaviors {
-        hrm: homerow_mods {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <TAPPING_TERM>;
-            flavor = "tap-preferred";
-            bindings = <&kp>, <&kp>;
-        };
-        sc: space_cadet { // same as lt, but with hold-preferred
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <TAPPING_TERM>;
-            flavor = "hold-preferred";
-            bindings = <&mo>, <&kp>;
-        };
-
-        // like ZMK's sticky layer (sl) but with a more robust timing
-        osl: one_shot_layer {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            tap-ms = <0>;
-            wait-ms = <0>;
-            bindings = <&macro_param_1to1>, <&macro_tap &sl MACRO_PLACEHOLDER>;
-        };
-        bsl: better_sticky_layer {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <TAPPING_TERM>;
-            flavor = "tap-preferred";
-            bindings = <&mo>, <&osl>;
-        };
-
-        // like ZMK's sticky key (sk) but with a more robust timing
-        osm: one_shot_modifier {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            tap-ms = <0>;
-            wait-ms = <0>;
-            bindings = <&macro_param_1to1>, <&macro_tap &sk MACRO_PLACEHOLDER>;
-        };
-        bsk: better_sticky_key {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <TAPPING_TERM>;
-            flavor = "tap-preferred";
-            bindings = <&kp>, <&osm>;
-        };
+  behaviors {
+    hrm: homerow_mods {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      tapping-term-ms = <TAPPING_TERM>;
+      flavor = "tap-preferred";
+      bindings = <&kp>, <&kp>;
     };
+    sc: space_cadet { // same as lt, but with hold-preferred
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      tapping-term-ms = <TAPPING_TERM>;
+      flavor = "hold-preferred";
+      bindings = <&mo>, <&kp>;
+    };
+
+    // like ZMK's sticky layer (sl) but with a more robust timing
+    osl: one_shot_layer {
+      compatible = "zmk,behavior-macro-one-param";
+      #binding-cells = <1>;
+      tap-ms = <0>;
+      wait-ms = <0>;
+      bindings = <&macro_param_1to1>, <&macro_tap &sl MACRO_PLACEHOLDER>;
+    };
+    bsl: better_sticky_layer {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      tapping-term-ms = <TAPPING_TERM>;
+      flavor = "tap-preferred";
+      bindings = <&mo>, <&osl>;
+    };
+
+    // like ZMK's sticky key (sk) but with a more robust timing
+    osm: one_shot_modifier {
+      compatible = "zmk,behavior-macro-one-param";
+      #binding-cells = <1>;
+      tap-ms = <0>;
+      wait-ms = <0>;
+      bindings = <&macro_param_1to1>, <&macro_tap &sk MACRO_PLACEHOLDER>;
+    };
+    bsk: better_sticky_key {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      tapping-term-ms = <TAPPING_TERM>;
+      flavor = "tap-preferred";
+      bindings = <&kp>, <&osm>;
+    };
+  };
 };

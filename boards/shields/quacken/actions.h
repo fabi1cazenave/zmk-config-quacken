@@ -1,8 +1,7 @@
 #include <dt-bindings/zmk/keys.h>
 
-/**
- * Action Combos
- */
+// Action Combos
+// clang-format off
 
 #ifndef CMD
 #define CMD RC // assume PC shortcuts by default (Ctrl key)

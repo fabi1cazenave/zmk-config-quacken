@@ -7,6 +7,8 @@
  *   ~[]_# |!;:?
  */
 
+// clang-format off
+
 // first row
 #define S_CARET &kp CARET
 #define S_LT    &kp LT
