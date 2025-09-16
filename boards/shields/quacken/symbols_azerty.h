@@ -50,7 +50,7 @@
       tap-ms = <0>;
       wait-ms = <0>;
       bindings
-        = <&macro_tap & kp LBKT>
+        = <&macro_tap &kp LBKT>
         , <&macro_pause_for_release>
         , <&macro_param_1to1>
         , <&kp MACRO_PLACEHOLDER>
@@ -66,7 +66,7 @@
         = <&macro_param_1to1>
         , <&kp MACRO_PLACEHOLDER>
         , <&macro_pause_for_release>
-        , <&macro_tap & kp SPACE>
+        , <&macro_tap &kp SPACE>
         ;
     };
   };
