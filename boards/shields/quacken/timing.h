@@ -29,8 +29,8 @@
 #define TAPPING_TERM 300
 #endif
 
-#define EZ_SL(layer) bsl (layer) (layer)
-#define EZ_SK(mod)   bsk (mod) (mod)
+#define EZ_SL(layer) &bsl (layer) (layer)
+#define EZ_SK(mod)   &bsk (mod) (mod)
 &sl{ quick-release; }; // seems useless (works fine without)
 &sk{ quick-release; }; // must have (lots of false positives otherwise)
 
